@@ -1,0 +1,63 @@
+<div class="page_middle">
+    <h2>Регистрация</h2>
+    <form
+            [formGroup]="regForm"
+            (ngSubmit)="send()">
+        <label>
+            E-mail:
+            <input
+                    formControlName="email"
+                    [ngClass]="{'invalid': regForm.get('email').invalid && regForm.get('email').touched}"
+                    type="email">
+            <span
+                    class="error"
+                    *ngIf="regForm.get('email').invalid && regForm.get('email').touched"
+            >
+        <span *ngIf="regForm.get('email').errors['required']">Email не должен быть пустым</span>
+        <span *ngIf="regForm.get('email').errors['email']">Введите корректный email адрес</span>
+      </span>
+        </label>
+        <label>
+            Придумайте пароль:
+            <input
+                    formControlName="password"
+                    [ngClass]="{'invalid': regForm.get('password').invalid && regForm.get('password').touched}"
+                    type="password">
+            <span
+                    class="error"
+                    *ngIf="regForm.get('password').invalid && regForm.get('password').touched"
+            >
+        <span *ngIf="regForm.get('password').errors['required']">Поле не должно быть пустым</span>
+        <span *ngIf="regForm.get('password').errors['minlength'] && regForm.get('password').errors['minlength']['requiredLength']">
+          Пароль должен быть больше {{regForm.get('password').errors['minlength']['requiredLength']}} символов.
+          Сейчас {{regForm.get('password').errors['minlength']['actualLength']}}
+        </span>
+      </span>
+        </label>
+        <label>
+            Повторите пароль:
+            <input
+                    formControlName="passwordConfirm"
+                    compare="password"
+                    [ngClass]="{'invalid': regForm.get('passwordConfirm').invalid && regForm.get('passwordConfirm').touched}"
+                    type="password">
+            <span
+                    class="error"
+                    *ngIf="regForm.get('passwordConfirm').invalid && regForm.get('passwordConfirm').touched"
+            >
+        <span *ngIf="regForm.get('passwordConfirm').errors['required']">
+            Поле не должно быть пустым
+        </span>
+        <span *ngIf="regForm.get('passwordConfirm').errors['compare']">
+            Значение не совпадает с полем Пароль
+        </span>
+      </span>
+        </label>
+        <button
+                [disabled]="regForm.invalid || regForm.disabled"
+                type="submit"
+                class="primary">
+            Зарегистрироваться
+        </button>
+    </form>
+</div>

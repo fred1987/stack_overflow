@@ -1,0 +1,29 @@
+<div class="page_middle">
+    <h2>Восстановление пароля</h2>
+    <form
+            *ngIf="!emailSent"
+            [formGroup]="recoveryForm"
+            (ngSubmit)="send()">
+        <label>
+            E-mail:
+            <input
+                    formControlName="email"
+                    [ngClass]="{'invalid': recoveryForm.get('email').invalid && recoveryForm.get('email').touched}"
+                    type="email">
+            <span
+                    class="error"
+                    *ngIf="recoveryForm.get('email').invalid && recoveryForm.get('email').touched"
+            >
+        <span *ngIf="recoveryForm.get('email').errors['required']">Email не должен быть пустым</span>
+        <span *ngIf="recoveryForm.get('email').errors['email']">Введите корректный email адрес</span>
+      </span>
+        </label>
+        <button
+                [disabled]="recoveryForm.invalid || recoveryForm.disabled"
+                type="submit"
+                class="primary">
+            восстановить пароль
+        </button>
+    </form>
+    <p *ngIf="emailSent">Письмо отправлено на Ваш email. Пожалуйста, проверьте Вашу почту.</p>
+</div>
