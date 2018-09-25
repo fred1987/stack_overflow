@@ -59,10 +59,9 @@ class UserController {
     static async changePassword(ctx) {
         const {email} = await pswdRec.findOne({hash: ctx.request.body.hash})
         const user = await User.findOne({email})
-        await user.save({
-            password: ctx.request.body.password
-        })
-        return user.select('email id')
+        return await user.save({
+            password: bcrypt.hashSync(ctx.request.body.password, bcrypt.genSaltSync(11))
+        }).select('email id')
     }
 
     static async getToken(ctx, candidate) {

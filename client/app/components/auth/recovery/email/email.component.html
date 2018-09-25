@@ -1,6 +1,7 @@
 <div class="page_middle">
     <h2>Восстановление пароля</h2>
     <form
+            class="auth_form"
             *ngIf="!emailSent"
             [formGroup]="recoveryForm"
             (ngSubmit)="send()">

@@ -6,8 +6,7 @@ import {AuthService} from '../../../../services/auth.service'
 
 @Component({
     selector: 'app-recovery-email',
-    templateUrl: './email.component.html',
-    styleUrls: ['./email.component.css']
+    templateUrl: './email.component.html'
 })
 export class RecoverySendEmailComponent implements OnInit, OnDestroy {
 

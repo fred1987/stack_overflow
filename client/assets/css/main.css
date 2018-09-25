@@ -234,3 +234,23 @@ ul.errors li:last-child {
 .page_middle h2 {
     text-align: center;
 }
+
+.auth_form input {
+    margin: 5px 0;
+    width: 100%;
+}
+
+.auth_form input.invalid {
+    border: 1px solid red;
+}
+
+.auth_form label {
+    margin-bottom: 15px;
+    display: block;
+}
+
+.auth_form .error {
+    font-size: .7em;
+    color: red;
+    display: block;
+}
