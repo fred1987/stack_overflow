@@ -16,11 +16,11 @@ export class AuthService {
     }
 
     register(user: User): Observable<User> {
-        return this.http.post<User>('http://localhost:3000/api/register', user)
+        return this.http.post<User>('/api/register', user)
     }
 
     login(user: User): Observable<{ token: string }> {
-        return this.http.post<{ token: string }>('http://localhost:3000/api/login', user).pipe(
+        return this.http.post<{ token: string }>('/api/login', user).pipe(
             tap(
                 ({token}) => {
                     localStorage.setItem('auth-token', token)
@@ -31,11 +31,11 @@ export class AuthService {
     }
 
     sendEmailRecovery(email: string) {
-        return this.http.post<{}>('http://localhost:3000/api/recovery/email', {email})
+        return this.http.post<{}>('/api/recovery/email', {email})
     }
 
     changePassword(data: { password: string, hash: string }) {
-        return this.http.post<{}>('http://localhost:3000/api/recovery/pswd', data)
+        return this.http.post<{}>('/api/recovery/pswd', data)
     }
 
     //Why? For honor!!!

@@ -1,0 +1,23 @@
+<h1>Результаты поиска</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Автор вопроса</th>
+        <th>Тема</th>
+        <th>Кол-во ответов</th>
+        <th>Теги</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let post of posts">
+        <td>{{ post.author }}</td>
+        <td>{{ post.theme }}</td>
+        <td>{{ post.answers }}</td>
+        <td>
+            <a *ngFor="let tag of post.tags">
+                {{ tag }}
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>

@@ -7,7 +7,8 @@ import {AuthService} from '../../../services/auth.service'
 
 @Component({
     selector: 'app-login',
-    templateUrl: './login.component.html'
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     send() {
         this.loginForm.disable()
         this.sub = this.auth.login(this.loginForm.value).subscribe(
-            () => this.router.navigate(['/crm']),
+            () => this.router.navigate(['/search']),
             error => {
 
                 this.loginForm.enable()

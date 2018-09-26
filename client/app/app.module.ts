@@ -1,17 +1,22 @@
 import {NgModule} from '@angular/core'
 import {BrowserModule} from '@angular/platform-browser'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 
 import {AppComponent} from './app.component'
 import {LoginComponent} from './components/auth/login/login.component'
 import {NotFoundComponent} from './components/not-found/not-found.component'
-import {RoutingModule} from './routing.module'
-import {FormsModule, ReactiveFormsModule} from '@angular/forms'
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 import {RegisterComponent} from './components/auth/register/register.component'
-import {CompareValidatorDirective} from './directives/compare-validator.directive'
-import {TokenInterceptor} from './interceptors/token.interceptor'
 import {RecoverySendEmailComponent} from './components/auth/recovery/email/email.component'
 import {ChangePasswordComponent} from './components/auth/recovery/change-password/change-password.component'
+import {SearchInputComponent} from './components/search/search-input/search-input.component'
+import {SearchDetailComponent} from './components/search/search-detail/search-detail.component'
+import {SearchListComponent} from './components/search/search-list/search-list.component'
+
+import {RoutingModule} from './routing.module'
+import {TokenInterceptor} from './interceptors/token.interceptor'
+import {CompareValidatorDirective} from './directives/compare-validator.directive'
+import {MessageComponent} from './components/message/message.component'
 
 @NgModule({
     imports: [
@@ -28,6 +33,10 @@ import {ChangePasswordComponent} from './components/auth/recovery/change-passwor
         RegisterComponent,
         RecoverySendEmailComponent,
         ChangePasswordComponent,
+        SearchInputComponent,
+        SearchDetailComponent,
+        SearchListComponent,
+        MessageComponent,
         NotFoundComponent
     ],
     providers: [

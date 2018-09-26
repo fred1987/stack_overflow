@@ -1,0 +1,13 @@
+.btn.reg {
+    float: right;
+}
+
+button {
+    float: left;
+}
+
+.forgot_pswd {
+    display: block;
+    width: 100%;
+    margin-top: 11px;
+}

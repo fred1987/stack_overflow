@@ -83,10 +83,25 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
+.clear {
+    clear: both;
+}
+
+a {
+    color: #207bbd;
+    text-decoration: none;
+}
+
+a:hover:not(.btn) {
+    text-decoration: underline;
+}
+
 button,
 .btn {
     line-height: 34px;
     font-size: 14px;
+    text-decoration: none;
+    display: table;
     outline: none;
     border: none;
     padding: 0 25px;

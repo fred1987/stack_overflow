@@ -1,33 +1,26 @@
 <div class="page_middle">
     <h2>Войти</h2>
-    <form
-            class="auth_form"
-            [formGroup]="loginForm"
-            (ngSubmit)="send()">
+    <form class="auth_form"
+          [formGroup]="loginForm"
+          (ngSubmit)="send()">
         <label>
             Email:
-            <input
-                    formControlName="email"
-                    [ngClass]="{'invalid': loginForm.get('email').invalid && loginForm.get('email').touched}"
-                    type="email">
-            <span
-                    class="error"
-                    *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched"
-            >
+            <input formControlName="email"
+                   [ngClass]="{'invalid': loginForm.get('email').invalid && loginForm.get('email').touched}"
+                   type="email">
+            <span class="error"
+                  *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched">
         <span *ngIf="loginForm.get('email').errors['required']">Email не должен быть пустым</span>
         <span *ngIf="loginForm.get('email').errors['email']">Введите корректный email адрес</span>
       </span>
         </label>
         <label>
             Введите пароль:
-            <input
-                    formControlName="password"
-                    [ngClass]="{'invalid': loginForm.get('password').invalid && loginForm.get('password').touched}"
-                    type="password">
-            <span
-                    class="error"
-                    *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched"
-            >
+            <input formControlName="password"
+                   [ngClass]="{'invalid': loginForm.get('password').invalid && loginForm.get('password').touched}"
+                   type="password">
+            <span class="error"
+                  *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
         <span *ngIf="loginForm.get('password').errors['required']">Пароль не должен быть пустым</span>
         <span *ngIf="loginForm.get('password').errors['minlength'] && loginForm.get('password').errors['minlength']['requiredLength']">
           Пароль должен быть больше {{loginForm.get('password').errors['minlength']['requiredLength']}} символов.
@@ -35,11 +28,19 @@
         </span>
       </span>
         </label>
-        <button
-                [disabled]="loginForm.invalid || loginForm.disabled"
+        <button [disabled]="loginForm.invalid || loginForm.disabled"
                 type="submit"
                 class="primary">
             Войти
         </button>
+        <a class="btn success reg"
+           routerLink="/register">
+            Регистрация
+        </a>
+        <div class="clear"></div>
+        <a class="forgot_pswd"
+           routerLink="/recovery/email">
+            Забыли пароль?
+        </a>
     </form>
 </div>

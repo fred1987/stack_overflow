@@ -6,7 +6,7 @@ import '../assets/css/main.css'
 
 @Component({
     selector: 'my-app',
-    template: '<router-outlet></router-outlet>'
+    template: '<router-outlet></router-outlet><message></message>'
 })
 
 export class AppComponent implements OnInit {

@@ -38,11 +38,10 @@ class UserController {
         })
 
         const mailOptions = {
-            from: email.user,
+            from: `ifred <${email.user}>`,
             to: ctx.request.body.email,
             subject: 'Восстановление пароля',
-            text: `Для восстановления пароля пройдите по ссылке http://localhost:6602/recovery/change_password?hash=${hash}`,
-            html: `Для восстановления пароля пройдите по <a href="http://localhost:6602/recovery/change_password?hash=${hash}">ссылке</a>`
+            html: `<h2>Восстановление пароля</h2><p>Чтобы восстановить пароль пройдите по <a href="http://localhost:6602/recovery/change_password?hash=${hash}">ссылке</a></p>`
         }
 
         const mail = await transporter.sendMail(mailOptions)
@@ -57,11 +56,14 @@ class UserController {
     }
 
     static async changePassword(ctx) {
-        const {email} = await pswdRec.findOne({hash: ctx.request.body.hash})
-        const user = await User.findOne({email})
-        return await user.save({
-            password: bcrypt.hashSync(ctx.request.body.password, bcrypt.genSaltSync(11))
-        }).select('email id')
+        const {email} = await pswdRec.findOneAndRemove({hash: ctx.request.body.hash})
+        const password = bcrypt.hashSync(ctx.request.body.password, bcrypt.genSaltSync(11))
+        const user = await User.findOneAndUpdate(
+            {email},
+            {$set: {password}},
+            {new: true}
+        ).select('email id')
+        ctx.body = (user) ? {error: false, user} : {error: true, message: 'Такого пользователя нет в БД'}
     }
 
     static async getToken(ctx, candidate) {
