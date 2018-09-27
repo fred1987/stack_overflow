@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms'
 import {Subscription} from 'rxjs'
 
 import {AuthService} from '../../../../services/auth.service'
-import {ActivatedRoute} from '@angular/router'
+import {ActivatedRoute, Router} from '@angular/router'
 
 @Component({
     selector: 'app-change-password',
@@ -15,7 +15,9 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     private hash: string = null
     sub: Subscription
 
-    constructor(private auth: AuthService, private route: ActivatedRoute) {
+    constructor(private auth: AuthService,
+                private router: Router,
+                private route: ActivatedRoute) {
         this.hash = this.route.snapshot.queryParams['hash']
     }
 
@@ -42,10 +44,13 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
             password: this.passwordForm.get('password').value,
             hash: this.hash
         }).subscribe(
-            () => {
-            },
+            () => this.router.navigate(['/'], {
+                queryParams: {
+                    password_changed: true
+                }
+            }),
             error => {
-                console.error(error)
+                //TODO показать сообщение об ошибке
                 this.passwordForm.enable()
             }
         )

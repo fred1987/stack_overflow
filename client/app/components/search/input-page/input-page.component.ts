@@ -7,10 +7,10 @@ import {StackPost} from '../../../interfaces'
 
 @Component({
     selector: 'search-input',
-    templateUrl: 'search-input.component.html',
-    styleUrls: ['search-input.component.css']
+    templateUrl: 'input-page.component.html',
+    styleUrls: ['input-page.component.css']
 })
-export class SearchInputComponent implements OnInit {
+export class InputPageComponent implements OnInit {
 
     searchForm: FormGroup
 
@@ -32,14 +32,15 @@ export class SearchInputComponent implements OnInit {
 
     send(): void {
         this.searchForm.disable()
-        this.stackoverflow.getPosts().subscribe(
+        this.stackoverflow.getPosts(this.searchForm.get('search').value.trim()).subscribe(
             () => {
 
-                //this.router.navigate(['/search/list'])
+                this.router.navigate(['/posts'])
             },
             error => {
+
+                //TODO сообщение об ошибке
                 this.searchForm.enable()
-                console.error(error)
             }
         )
     }

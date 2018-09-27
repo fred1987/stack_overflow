@@ -9,9 +9,9 @@ import {NotFoundComponent} from './components/not-found/not-found.component'
 import {RegisterComponent} from './components/auth/register/register.component'
 import {RecoverySendEmailComponent} from './components/auth/recovery/email/email.component'
 import {ChangePasswordComponent} from './components/auth/recovery/change-password/change-password.component'
-import {SearchInputComponent} from './components/search/search-input/search-input.component'
-import {SearchDetailComponent} from './components/search/search-detail/search-detail.component'
-import {SearchListComponent} from './components/search/search-list/search-list.component'
+import {InputPageComponent} from './components/search/input-page/input-page.component'
+import {ListPageComponent} from './components/search/list-page/list-page.component'
+import {InfoPanelComponent} from './components/search/info-panel/info-panel.component'
 
 import {RoutingModule} from './routing.module'
 import {TokenInterceptor} from './interceptors/token.interceptor'
@@ -33,18 +33,18 @@ import {MessageComponent} from './components/message/message.component'
         RegisterComponent,
         RecoverySendEmailComponent,
         ChangePasswordComponent,
-        SearchInputComponent,
-        SearchDetailComponent,
-        SearchListComponent,
+        ListPageComponent,
+        InputPageComponent,
+        InfoPanelComponent,
         MessageComponent,
         NotFoundComponent
     ],
     providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            multi: true,
-            useClass: TokenInterceptor
-        }
+        // {
+        //     provide: HTTP_INTERCEPTORS,
+        //     multi: true,
+        //     useClass: TokenInterceptor
+        // }
     ],
     bootstrap: [AppComponent]
 })

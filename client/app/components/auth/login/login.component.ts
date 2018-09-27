@@ -31,13 +31,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         })
 
         this.route.queryParams.subscribe((params: Params) => {
-            if (params['registered']) {
-
-
+            if (params['password_changed']) {
+                //TODO пароль был изменен, попросить заново авторизоваться
             } else if (params['accessDenied']) {
-
+                //TODO доступ запрещен, попросить авторизоваться или зарегистрироваться
             } else if (params['sessionFailed']) {
-
+                //TODO сессия закончилась, попросить авторизоваться заново
             }
         })
     }
@@ -51,7 +50,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.sub = this.auth.login(this.loginForm.value).subscribe(
             () => this.router.navigate(['/search']),
             error => {
-
+                //TODO показать сообщение об ошибке
                 this.loginForm.enable()
             }
         )

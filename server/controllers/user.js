@@ -63,7 +63,12 @@ class UserController {
             {$set: {password}},
             {new: true}
         ).select('email id')
-        ctx.body = (user) ? {error: false, user} : {error: true, message: 'Такого пользователя нет в БД'}
+        if (user) {
+            ctx.body = {error: false, user}
+        } else {
+            ctx.response.status = 404
+            ctx.body = {error: true, message: 'Такого пользователя нет в БД'}
+        }
     }
 
     static async getToken(ctx, candidate) {
@@ -85,20 +90,34 @@ class UserController {
         const candidate = await UserController.findByEmail(ctx)
         if (!candidate) {
             const salt = bcrypt.genSaltSync(11)
-            const user = await User({
+            const candidate = await User({
                 email: ctx.request.body.email,
                 password: bcrypt.hashSync(ctx.request.body.password, salt)
             }).save()
-            ctx.response.status = 201
-            ctx.body = {
-                error: false,
-                user
-            }
+
+            //auth user
+            await UserController.auth(ctx, candidate)
         } else {
             ctx.response.status = 409
             ctx.body = {
                 error: true,
-                message: 'Такой пользователь уже зарегистрирован в системе'
+                message: 'Пользователь с таким email уже зарегистрирован в системе'
+            }
+        }
+    }
+
+    static async auth(ctx, candidate) {
+        const res = await UserController.getToken(ctx, candidate)
+        if (res.error) {
+            ctx.response.status = 403
+            ctx.body = {
+                error: true,
+                message: 'Неправильный логин или пароль'
+            }
+        } else {
+            ctx.body = {
+                error: false,
+                token: res.token
             }
         }
     }
@@ -112,19 +131,7 @@ class UserController {
                 message: 'Пользователь не найден'
             }
         } else {
-            const res = await UserController.getToken(ctx, candidate)
-            if (res.error) {
-                ctx.response.status = 403
-                ctx.body = {
-                    error: true,
-                    message: 'Неправильный логин или пароль'
-                }
-            } else {
-                ctx.body = {
-                    error: false,
-                    token: res.token
-                }
-            }
+            await UserController.auth(ctx, candidate)
         }
     }
 }

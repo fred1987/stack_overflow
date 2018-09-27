@@ -15,8 +15,15 @@ export class AuthService {
     constructor(private http: HttpClient) {
     }
 
-    register(user: User): Observable<User> {
-        return this.http.post<User>('/api/register', user)
+    register(user: User): Observable<{ token: string }> {
+        return this.http.post<{ token: string }>('/api/register', user).pipe(
+            tap(
+                ({token}) => {
+                    localStorage.setItem('auth-token', token)
+                    this.token = token
+                }
+            )
+        )
     }
 
     login(user: User): Observable<{ token: string }> {
@@ -47,6 +54,7 @@ export class AuthService {
         return this._token
     }
 
+    //just checking for a token in localStorage
     isAuthenticated(): boolean {
         return !!this.token
     }

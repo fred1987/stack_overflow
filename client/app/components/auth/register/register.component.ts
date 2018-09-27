@@ -45,12 +45,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
             email: this.regForm.get('email').value,
             password: this.regForm.get('password').value
         }).subscribe(
-            () => this.router.navigate(['/login'], {
-                queryParams: {
-                    registered: true
-                }
-            }),
+            () => this.router.navigate(['/search']),
             error => {
+                //TODO показать сообщение об ошибке
                 this.regForm.enable()
             }
         )

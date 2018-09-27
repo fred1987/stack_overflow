@@ -1,6 +1,5 @@
 const Router = require('koa-router')
 const userController = require('./controllers/user')
-
 const {createReadStream} = require('fs')
 
 const router = new Router()

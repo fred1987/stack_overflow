@@ -8,14 +8,15 @@ import {AuthService} from '../services/auth.service'
 })
 export class AuthGuard implements CanActivate, CanActivateChild {
 
-    constructor(private auth: AuthService, private router: Router) {
+    constructor(private auth: AuthService,
+                private router: Router) {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
         if (this.auth.isAuthenticated()) {
             return of(true)
         } else {
-            this.router.navigate(['/login'], {
+            this.router.navigate(['/'], {
                 queryParams: {
                     accessDenied: true
                 }
