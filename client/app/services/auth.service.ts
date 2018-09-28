@@ -45,7 +45,6 @@ export class AuthService {
         return this.http.post<{}>('/api/recovery/pswd', data)
     }
 
-    //Why? For honor!!!
     set token(token: string) {
         this._token = token
     }

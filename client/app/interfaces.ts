@@ -3,9 +3,20 @@ export interface User {
     password: string
 }
 
-export interface StackPost {
-    author: string,
-    theme: string,
+export interface StackOverflowQuestion {
+    id: number,
+    title: string,
+    owner: {
+        id: number,
+        name: string
+    },
     tags: string[],
-    answers: number
+    answer_count: number
+}
+
+export interface StackOverflowAnswers {
+    creation_date: Date,
+    owner_name: string,
+    link: string
+
 }

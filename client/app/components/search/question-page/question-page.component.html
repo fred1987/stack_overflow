@@ -1,0 +1,10 @@
+<div *ngIf="answers.length > 0">
+    <ul>
+        <li *ngFor="let answer of answers">
+            <span class="author">{{ answer.owner_name }}</span>
+            <span class="date">{{ answer.creation_date | date:'short'}}</span>
+            <a [href]="answer.link" class="link" target="_blank">Посмотреть ответ</a>
+        </li>
+    </ul>
+</div>
+<p *ngIf="answers.length === 0">Ответов по этой теме нет</p>

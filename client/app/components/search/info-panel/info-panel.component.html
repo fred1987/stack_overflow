@@ -1,0 +1,28 @@
+<div *ngIf="data.length > 0">
+    <table>
+        <thead>
+        <tr>
+            <th>Автор вопроса</th>
+            <th>Тема</th>
+            <th>Кол-во ответов</th>
+            <th>Теги</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let question of data">
+            <td>
+                {{ question.owner.name }}
+            </td>
+            <td>
+                {{ question.title }}
+            </td>
+            <td>
+                {{ question.answer_count }}
+            </td>
+            <td>
+                {{ tag }}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

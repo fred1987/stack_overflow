@@ -17,6 +17,7 @@ import {RoutingModule} from './routing.module'
 import {TokenInterceptor} from './interceptors/token.interceptor'
 import {CompareValidatorDirective} from './directives/compare-validator.directive'
 import {MessageComponent} from './components/message/message.component'
+import {QuestionPageComponent} from './components/search/question-page/question-page.component'
 
 @NgModule({
     imports: [
@@ -35,6 +36,7 @@ import {MessageComponent} from './components/message/message.component'
         ChangePasswordComponent,
         ListPageComponent,
         InputPageComponent,
+        QuestionPageComponent,
         InfoPanelComponent,
         MessageComponent,
         NotFoundComponent

@@ -3,7 +3,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms'
 import {Router} from '@angular/router'
 
 import {StackoverflowService} from '../../../services/stackoverflow.service'
-import {StackPost} from '../../../interfaces'
 
 @Component({
     selector: 'search-input',
@@ -14,11 +13,8 @@ export class InputPageComponent implements OnInit {
 
     searchForm: FormGroup
 
-    posts: StackPost[]
-
-    constructor(private stackoverflow: StackoverflowService,
+    constructor(private stackOverflowService: StackoverflowService,
                 private router: Router) {
-
     }
 
     ngOnInit() {
@@ -32,11 +28,13 @@ export class InputPageComponent implements OnInit {
 
     send(): void {
         this.searchForm.disable()
-        this.stackoverflow.getPosts(this.searchForm.get('search').value.trim()).subscribe(
-            () => {
-
-                this.router.navigate(['/posts'])
-            },
+        this.stackOverflowService.getQuestions({
+            order: 'desc',
+            sort: 'activity',
+            q: this.searchForm.get('search').value.trim(),
+            site: 'stackoverflow'
+        }).subscribe(
+            () => this.router.navigate(['/search/posts']),
             error => {
 
                 //TODO сообщение об ошибке
