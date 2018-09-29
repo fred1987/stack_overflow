@@ -55,7 +55,7 @@ export class StackoverflowService {
                     let answers = data['items']
                     return answers.map((item: any) => {
                         return {
-                            creation_date: item.creation_date,
+                            creation_date: item.creation_date * 1000,
                             owner_name: item.owner.display_name,
                             link: `https://stackoverflow.com/questions/${item.question_id}/${item.answer_id}#${item.answer_id}`
                         }

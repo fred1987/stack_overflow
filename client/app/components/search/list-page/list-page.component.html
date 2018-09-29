@@ -1,38 +1,41 @@
-<h1>Результаты поиска</h1>
-<table *ngIf="questions.length > 0">
-    <thead>
-    <tr>
-        <th>Автор вопроса</th>
-        <th>Тема</th>
-        <th>Кол-во ответов</th>
-        <th>Теги</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let question of questions">
-        <td>
-            <a (click)="getAuthorQuestions(question.owner.id)">
-                {{ question.owner.name }}
-            </a>
-        </td>
-        <td>
-            <a (click)="getAnswers(question.id)">
-                {{ question.title }}
-            </a>
-        </td>
-        <td>
-            <a (click)="getAnswers(question.id)">
-                {{ question.answer_count }}
-            </a>
-        </td>
-        <td>
-            <a *ngFor="let tag of question.tags"
-               (click)="getTagQuestions(tag)">
-                {{ tag }}
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<p *ngIf="questions.length === 0">Ничего не найдено</p>
-<info-panel [data]="infoTable"></info-panel>
+<div class="content shadow_box">
+    <h1>Результаты поиска</h1>
+    <table *ngIf="questions.length > 0">
+        <thead>
+        <tr>
+            <th>Автор вопроса</th>
+            <th>Тема</th>
+            <th>Кол-во ответов</th>
+            <th>Теги</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let question of questions">
+            <td>
+                <a (click)="getAuthorQuestions(question.owner.id)">
+                    {{ question.owner.name }}
+                </a>
+            </td>
+            <td>
+                <a (click)="getAnswers(question.id, question.answer_count)">
+                    {{ question.title }}
+                </a>
+            </td>
+            <td>
+                <a (click)="getAnswers(question.id, question.answer_count)">
+                    {{ question.answer_count }}
+                </a>
+            </td>
+            <td>
+                <a *ngFor="let tag of question.tags"
+                   (click)="getTagQuestions(tag)">
+                    {{ tag }}
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p *ngIf="questions.length === 0">Ничего не найдено.
+        Попробуйте ввести другой поисковой запрос.</p>
+    <info-panel [data]="infoTable" [show]="showPanel"></info-panel>
+</div>

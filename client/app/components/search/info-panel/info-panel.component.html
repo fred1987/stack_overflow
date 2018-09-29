@@ -1,5 +1,10 @@
-<div *ngIf="data.length > 0">
-    <table>
+<div class="panel" [@panel]="state">
+    <span *ngIf="state"
+          class="close_panel"
+          (click)="hidePanel()">
+        &times;
+    </span>
+    <table *ngIf="data.length > 0">
         <thead>
         <tr>
             <th>Автор вопроса</th>
@@ -20,9 +25,12 @@
                 {{ question.answer_count }}
             </td>
             <td>
-                {{ tag }}
+                <span *ngFor="let tag of question.tags">
+                    {{ tag }}
+                </span>
             </td>
         </tr>
         </tbody>
     </table>
+    <p *ngIf="data.length === 0">Ничего не найдено.</p>
 </div>

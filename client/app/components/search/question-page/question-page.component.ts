@@ -13,6 +13,7 @@ import {Subscription} from 'rxjs'
 export class QuestionPageComponent implements OnInit, OnDestroy {
 
     answers: StackOverflowAnswers[] = []
+    preloader: boolean = true
     sub: Subscription
 
     constructor(private stackOverflowService: StackoverflowService,
@@ -23,6 +24,7 @@ export class QuestionPageComponent implements OnInit, OnDestroy {
         this.sub = this.stackOverflowService.getAnswers(this.route.snapshot.params.id).subscribe(
             (data) => {
                 this.answers = data
+                this.preloader = false
             },
             error => {
                 //TODO сообщение об ошибке

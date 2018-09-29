@@ -1,18 +1,21 @@
-<h1>Поиск по stackoverflow</h1>
-<form [formGroup]="searchForm"
-      (ngSubmit)="send()">
-    <input formControlName="search"
-           [ngClass]="{'invalid': searchForm.get('search').invalid && searchForm.get('search').touched}"
-           type="text">
-    <span class="error"
-          *ngIf="searchForm.get('search').invalid && searchForm.get('search').touched">
+<div class="search_panel">
+    <h1>поиск по Stack Overflow</h1>
+    <form [formGroup]="searchForm"
+          (ngSubmit)="send()">
+        <input formControlName="search"
+               [ngClass]="{'invalid': searchForm.get('search').invalid && searchForm.get('search').touched}"
+               type="text">
+        <span class="error"
+              *ngIf="searchForm.get('search').invalid && searchForm.get('search').touched">
         <span *ngIf="searchForm.get('search').errors['required']">
             Поле поиска не должно быть пустым
         </span>
       </span>
-    <button type="submit"
-            [disabled]="searchForm.invalid || searchForm.disabled"
-            class="primary">
-        Искать
-    </button>
-</form>
+        <button type="submit"
+                [disabled]="searchForm.invalid || searchForm.disabled"
+                class="primary">
+            Искать
+        </button>
+    </form>
+    <preloader *ngIf="sent"></preloader>
+</div>

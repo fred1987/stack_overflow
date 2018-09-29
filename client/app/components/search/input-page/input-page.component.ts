@@ -12,6 +12,7 @@ import {StackoverflowService} from '../../../services/stackoverflow.service'
 export class InputPageComponent implements OnInit {
 
     searchForm: FormGroup
+    sent: boolean = false
 
     constructor(private stackOverflowService: StackoverflowService,
                 private router: Router) {
@@ -27,6 +28,7 @@ export class InputPageComponent implements OnInit {
     }
 
     send(): void {
+        this.sent = true
         this.searchForm.disable()
         this.stackOverflowService.getQuestions({
             order: 'desc',
@@ -34,7 +36,10 @@ export class InputPageComponent implements OnInit {
             q: this.searchForm.get('search').value.trim(),
             site: 'stackoverflow'
         }).subscribe(
-            () => this.router.navigate(['/search/posts']),
+            () => {
+                this.sent = false
+                this.router.navigate(['/search/posts'])
+            },
             error => {
 
                 //TODO сообщение об ошибке

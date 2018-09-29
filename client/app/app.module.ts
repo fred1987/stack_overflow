@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core'
 import {BrowserModule} from '@angular/platform-browser'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 
@@ -18,6 +19,7 @@ import {TokenInterceptor} from './interceptors/token.interceptor'
 import {CompareValidatorDirective} from './directives/compare-validator.directive'
 import {MessageComponent} from './components/message/message.component'
 import {QuestionPageComponent} from './components/search/question-page/question-page.component'
+import {PreloaderComponent} from './components/preloader/preloader.component'
 
 @NgModule({
     imports: [
@@ -25,7 +27,8 @@ import {QuestionPageComponent} from './components/search/question-page/question-
         RoutingModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpClientModule
+        HttpClientModule,
+        BrowserAnimationsModule
     ],
     declarations: [
         AppComponent,
@@ -39,7 +42,8 @@ import {QuestionPageComponent} from './components/search/question-page/question-
         QuestionPageComponent,
         InfoPanelComponent,
         MessageComponent,
-        NotFoundComponent
+        NotFoundComponent,
+        PreloaderComponent
     ],
     providers: [
         // {

@@ -1,0 +1,24 @@
+.panel {
+    position: fixed;
+    box-shadow: 0 -3px 4px -3px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    z-index: 200;
+    height: 500px;
+    width: 100%;
+    left: 0;
+    padding: 17px;
+}
+
+.close_panel {
+    position: absolute;
+    top: -40px;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    background-color: red;
+    font-size: 30px;
+    right: 17px;
+    cursor: pointer;
+}

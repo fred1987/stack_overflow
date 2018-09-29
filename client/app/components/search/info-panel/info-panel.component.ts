@@ -1,17 +1,36 @@
-import {Component, Input, OnInit} from '@angular/core'
+import {Component, Input} from '@angular/core'
+import {animate, state, style, transition, trigger} from '@angular/animations'
+
 import {StackOverflowQuestion} from '../../../interfaces'
 
 @Component({
     selector: 'info-panel',
     templateUrl: 'info-panel.component.html',
-    styleUrls: ['info-panel.component.css']
+    styleUrls: ['info-panel.component.css'],
+    animations: [
+        trigger('panel', [
+            state('start', style({
+                bottom: '-550px'
+            })),
+            state('end', style({
+                bottom: '0'
+            })),
+            transition('start => end', animate('500ms 0.5s ease-out')),
+            transition('end => start', animate('500ms 0.5s ease-out'))
+        ])
+    ]
 })
-export class InfoPanelComponent implements OnInit {
-    hidden: boolean = true
+export class InfoPanelComponent {
+    state: string
+
     @Input() data: StackOverflowQuestion[]
 
-    ngOnInit() {
-        console.log(this.data)
+    @Input()
+    set show(show: boolean) {
+        this.state = (show) ? 'end' : 'start'
     }
 
+    private hidePanel() {
+        this.state = 'start'
+    }
 }
