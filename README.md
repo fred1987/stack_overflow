@@ -1,4 +1,4 @@
-# angular Stack Overflow search
+# Angular 6. Stack Overflow search.
 
 ## Project setup
 ```
