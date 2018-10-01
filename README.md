@@ -10,3 +10,10 @@ npm run server
 ```
 http://localhost:3000
 ```
+
+### navigate components with keyboard
+
+##### ESC - login page
+##### CTRL + A - register page
+##### CTRL + R - password recovery page
+##### CTRL + Z - search page
