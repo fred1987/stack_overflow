@@ -3,7 +3,7 @@ const pswdRec = require('../models/passwordRecovery')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
-const {token, email} = require('../config')
+const {token, email, port, url} = require('../config')
 
 class UserController {
     static async findByEmail(ctx) {
@@ -41,7 +41,7 @@ class UserController {
             from: `ifred <${email.user}>`,
             to: ctx.request.body.email,
             subject: 'Восстановление пароля',
-            html: `<h2>Восстановление пароля</h2><p>Чтобы восстановить пароль пройдите по <a href="http://localhost:6602/recovery/change_password?hash=${hash}">ссылке</a></p>`
+            html: `<h2>Восстановление пароля</h2><p>Чтобы восстановить пароль пройдите по <a href="${url}:${port}/recovery/change_password?hash=${hash}">ссылке</a></p>`
         }
 
         const mail = await transporter.sendMail(mailOptions)

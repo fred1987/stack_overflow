@@ -48,10 +48,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
             password: this.regForm.get('password').value
         }).subscribe(
             () => this.router.navigate(['/search']),
-            () => {
+            err => {
                 this.messageService.add({
                     type: 'error',
-                    text: 'Что-то пошло не так...'
+                    text: err.error.message
                 })
                 this.regForm.enable()
             }

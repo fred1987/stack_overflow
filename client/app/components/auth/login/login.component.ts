@@ -61,10 +61,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loginForm.disable()
         this.sub = this.auth.login(this.loginForm.value).subscribe(
             () => this.router.navigate(['/search']),
-            () => {
+            err => {
                 this.messageService.add({
                     type: 'error',
-                    text: 'Неправильный логин или пароль'
+                    text: err.error.message
                 })
                 this.loginForm.enable()
             }

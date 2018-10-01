@@ -51,10 +51,10 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
                     password_changed: true
                 }
             }),
-            () => {
+            err => {
                 this.messageService.add({
                     type: 'error',
-                    text: 'Что-то пошло не так...'
+                    text: err.error.message
                 })
                 this.passwordForm.enable()
             }

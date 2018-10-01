@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms'
 import {Subscription} from 'rxjs'
 
 import {AuthService} from '../../../../services/auth.service'
+import {MessageService} from '../../../../services/message.service'
 
 @Component({
     selector: 'app-recovery-email',
@@ -14,7 +15,8 @@ export class RecoverySendEmailComponent implements OnInit, OnDestroy {
     sub: Subscription
     emailSent: boolean = false
 
-    constructor(private auth: AuthService) {
+    constructor(private auth: AuthService,
+                private messageService: MessageService) {
     }
 
     ngOnInit() {
@@ -34,8 +36,11 @@ export class RecoverySendEmailComponent implements OnInit, OnDestroy {
         this.recoveryForm.disable()
         this.sub = this.auth.sendEmailRecovery(this.recoveryForm.get('email').value).subscribe(
             () => this.emailSent = true,
-            error => {
-                console.error(error)
+            err => {
+                this.messageService.add({
+                    type: 'error',
+                    text: err.error.message
+                })
                 this.recoveryForm.enable()
             }
         )

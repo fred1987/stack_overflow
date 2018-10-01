@@ -37,11 +37,11 @@ export class AuthService {
         )
     }
 
-    sendEmailRecovery(email: string) {
+    sendEmailRecovery(email: string): Observable<any> {
         return this.http.post<{}>('/api/recovery/email', {email})
     }
 
-    changePassword(data: { password: string, hash: string }) {
+    changePassword(data: { password: string, hash: string }): Observable<any> {
         return this.http.post<{}>('/api/recovery/pswd', data)
     }
 
@@ -58,7 +58,7 @@ export class AuthService {
         return !!this.token
     }
 
-    logout() {
+    logout(): void {
         this.token = null
         localStorage.clear()
     }
