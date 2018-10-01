@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms'
 import {Router} from '@angular/router'
 
 import {StackoverflowService} from '../../../services/stackoverflow.service'
+import {MessageService} from '../../../services/message.service'
 
 @Component({
     selector: 'search-input',
@@ -15,7 +16,8 @@ export class InputPageComponent implements OnInit {
     sent: boolean = false
 
     constructor(private stackOverflowService: StackoverflowService,
-                private router: Router) {
+                private router: Router,
+                private messageService: MessageService) {
     }
 
     ngOnInit() {
@@ -40,9 +42,11 @@ export class InputPageComponent implements OnInit {
                 this.sent = false
                 this.router.navigate(['/search/posts'])
             },
-            error => {
-
-                //TODO сообщение об ошибке
+            () => {
+                this.messageService.add({
+                    type: 'error',
+                    text: 'Что-то пошло не так...'
+                })
                 this.searchForm.enable()
             }
         )

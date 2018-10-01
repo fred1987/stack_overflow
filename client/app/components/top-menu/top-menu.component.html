@@ -1,0 +1,20 @@
+<header>
+    <nav>
+        <ul class="main_menu">
+            <li>
+                <a routerLink="/search">Поиск по Stack Overflow</a>
+            </li>
+        </ul>
+        <ul class="auth">
+            <li *ngIf="!isAuth">
+                <a routerLink="/">Войти</a>
+            </li>
+            <li *ngIf="!isAuth">
+                <a routerLink="/register">Регистрация</a>
+            </li>
+            <li *ngIf="isAuth">
+                <a (click)="logout()">Выйти</a>
+            </li>
+        </ul>
+    </nav>
+</header>

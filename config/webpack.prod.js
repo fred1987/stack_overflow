@@ -1,6 +1,5 @@
 const webpackMerge = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const webpackCommon = require('./webpack.common.js')
 const helpers = require('./helpers')
 
@@ -20,8 +19,7 @@ module.exports = webpackMerge(webpackCommon, {
             publicPath: '/public/',
             filename: '[name].bundle.css',
             chunkFilename: '[name].chunk.css'
-        }),
-        new UglifyJsPlugin({sourceMap: true})
+        })
     ],
     performance: {
         hints: 'warning', // enum

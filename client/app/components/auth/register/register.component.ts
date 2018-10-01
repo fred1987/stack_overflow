@@ -4,6 +4,7 @@ import {Router} from '@angular/router'
 import {Subscription} from 'rxjs'
 
 import {AuthService} from '../../../services/auth.service'
+import {MessageService} from '../../../services/message.service'
 
 @Component({
     selector: 'app-register',
@@ -15,7 +16,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     sub: Subscription
 
     constructor(private auth: AuthService,
-                private router: Router) {
+                private router: Router,
+                private messageService: MessageService) {
     }
 
     ngOnInit() {
@@ -46,8 +48,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
             password: this.regForm.get('password').value
         }).subscribe(
             () => this.router.navigate(['/search']),
-            error => {
-                //TODO показать сообщение об ошибке
+            () => {
+                this.messageService.add({
+                    type: 'error',
+                    text: 'Что-то пошло не так...'
+                })
                 this.regForm.enable()
             }
         )

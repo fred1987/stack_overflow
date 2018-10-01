@@ -13,13 +13,14 @@ import {ChangePasswordComponent} from './components/auth/recovery/change-passwor
 import {InputPageComponent} from './components/search/input-page/input-page.component'
 import {ListPageComponent} from './components/search/list-page/list-page.component'
 import {InfoPanelComponent} from './components/search/info-panel/info-panel.component'
+import {QuestionPageComponent} from './components/search/question-page/question-page.component'
+import {PreloaderComponent} from './components/preloader/preloader.component'
 
 import {RoutingModule} from './routing.module'
 import {TokenInterceptor} from './interceptors/token.interceptor'
 import {CompareValidatorDirective} from './directives/compare-validator.directive'
 import {MessageComponent} from './components/message/message.component'
-import {QuestionPageComponent} from './components/search/question-page/question-page.component'
-import {PreloaderComponent} from './components/preloader/preloader.component'
+import {TopMenuComponent} from './components/top-menu/top-menu.component'
 
 @NgModule({
     imports: [
@@ -42,6 +43,7 @@ import {PreloaderComponent} from './components/preloader/preloader.component'
         QuestionPageComponent,
         InfoPanelComponent,
         MessageComponent,
+        TopMenuComponent,
         NotFoundComponent,
         PreloaderComponent
     ],

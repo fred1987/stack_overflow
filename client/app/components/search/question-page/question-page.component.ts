@@ -1,8 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core'
-import {StackoverflowService} from '../../../services/stackoverflow.service'
 import {ActivatedRoute} from '@angular/router'
-import {StackOverflowAnswers} from '../../../interfaces'
 import {Subscription} from 'rxjs'
+
+import {StackOverflowAnswers} from '../../../interfaces'
+import {StackoverflowService} from '../../../services/stackoverflow.service'
+import {MessageService} from '../../../services/message.service'
 
 @Component({
     selector: 'question-page',
@@ -17,19 +19,24 @@ export class QuestionPageComponent implements OnInit, OnDestroy {
     sub: Subscription
 
     constructor(private stackOverflowService: StackoverflowService,
-                private route: ActivatedRoute) {
+                private route: ActivatedRoute,
+                private messageService: MessageService) {
     }
 
     ngOnInit() {
-        this.sub = this.stackOverflowService.getAnswers(this.route.snapshot.params.id).subscribe(
-            (data) => {
-                this.answers = data
-                this.preloader = false
-            },
-            error => {
-                //TODO сообщение об ошибке
-            }
-        )
+        this.sub = this.stackOverflowService.getAnswers(this.route.snapshot.params.id)
+            .subscribe(
+                (data) => {
+                    this.answers = data
+                    this.preloader = false
+                },
+                () => {
+                    this.messageService.add({
+                        type: 'error',
+                        text: 'Что-то пошло не так...'
+                    })
+                }
+            )
     }
 
     ngOnDestroy() {

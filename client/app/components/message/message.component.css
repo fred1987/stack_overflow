@@ -1,0 +1,22 @@
+.message {
+    position: fixed;
+    top: 70px;
+    width: 300px;
+    height: auto;
+    right: 20px;
+    color: #fff;
+    padding: 17px;
+    text-align: center;
+}
+
+.message.error {
+    background-color: red;
+}
+
+.message.warn {
+    background-color: orange;
+}
+
+.message.success {
+    background-color: green;
+}

@@ -1,5 +1,23 @@
+<div class="nav_page_wrapper">
+    <a routerLink="/search"
+       class="nav_btn btn">
+        к странице поиска
+    </a>
+</div>
 <div class="content shadow_box">
     <h1>Результаты поиска</h1>
+    <div class="sort_wrapper"
+         *ngIf="questions.length > 0">
+        <label for="sort_input">Сортировать по</label>
+        <select id="sort_input"
+                (change)="sort($event.target.value)">
+            <option value=""></option>
+            <option value="author">Автору</option>
+            <option value="theme">Теме</option>
+            <option value="count">Количеству ответов</option>
+            <option value="tags">Количеству тегов</option>
+        </select>
+    </div>
     <table *ngIf="questions.length > 0">
         <thead>
         <tr>
@@ -17,12 +35,12 @@
                 </a>
             </td>
             <td>
-                <a (click)="getAnswers(question.id, question.answer_count)">
+                <a (click)="getAnswers(question.id)">
                     {{ question.title }}
                 </a>
             </td>
             <td>
-                <a (click)="getAnswers(question.id, question.answer_count)">
+                <a (click)="getAnswers(question.id)">
                     {{ question.answer_count }}
                 </a>
             </td>
@@ -38,4 +56,5 @@
     <p *ngIf="questions.length === 0">Ничего не найдено.
         Попробуйте ввести другой поисковой запрос.</p>
     <info-panel [data]="infoTable" [show]="showPanel"></info-panel>
+    <preloader *ngIf="loading"></preloader>
 </div>

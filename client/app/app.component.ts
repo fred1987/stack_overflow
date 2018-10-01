@@ -8,6 +8,7 @@ import '../assets/css/main.css'
 @Component({
     selector: 'my-app',
     template: `
+        <top-menu></top-menu>
         <main [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''">
             <router-outlet #o="outlet"></router-outlet>
         </main>

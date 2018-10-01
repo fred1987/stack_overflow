@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core'
 import {FormControl, FormGroup, Validators} from '@angular/forms'
+import {ActivatedRoute, Router} from '@angular/router'
 import {Subscription} from 'rxjs'
 
 import {AuthService} from '../../../../services/auth.service'
-import {ActivatedRoute, Router} from '@angular/router'
+import {MessageService} from '../../../../services/message.service'
 
 @Component({
     selector: 'app-change-password',
@@ -17,7 +18,8 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 
     constructor(private auth: AuthService,
                 private router: Router,
-                private route: ActivatedRoute) {
+                private route: ActivatedRoute,
+                private messageService: MessageService) {
         this.hash = this.route.snapshot.queryParams['hash']
     }
 
@@ -49,8 +51,11 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
                     password_changed: true
                 }
             }),
-            error => {
-                //TODO показать сообщение об ошибке
+            () => {
+                this.messageService.add({
+                    type: 'error',
+                    text: 'Что-то пошло не так...'
+                })
                 this.passwordForm.enable()
             }
         )

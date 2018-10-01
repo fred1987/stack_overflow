@@ -4,6 +4,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router'
 import {Subscription} from 'rxjs'
 
 import {AuthService} from '../../../services/auth.service'
+import {MessageService} from '../../../services/message.service'
 
 @Component({
     selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     constructor(private auth: AuthService,
                 private router: Router,
-                private route: ActivatedRoute) {
+                private route: ActivatedRoute,
+                private messageService: MessageService) {
     }
 
     ngOnInit() {
@@ -30,13 +32,23 @@ export class LoginComponent implements OnInit, OnDestroy {
                 [Validators.required, Validators.minLength(6)])
         })
 
+
         this.route.queryParams.subscribe((params: Params) => {
             if (params['password_changed']) {
-                //TODO пароль был изменен, попросить заново авторизоваться
+                this.messageService.add({
+                    type: 'success',
+                    text: 'Ваш пароль был изменен. Пожалуйста, авторизуйтесь с новым паролем.'
+                })
             } else if (params['accessDenied']) {
-                //TODO доступ запрещен, попросить авторизоваться или зарегистрироваться
+                this.messageService.add({
+                    type: 'warn',
+                    text: 'Необходимо авторизоваться!'
+                })
             } else if (params['sessionFailed']) {
-                //TODO сессия закончилась, попросить авторизоваться заново
+                this.messageService.add({
+                    type: 'warn',
+                    text: 'Сессия истекла. Необходимо снова авторизоваться.'
+                })
             }
         })
     }
@@ -49,8 +61,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loginForm.disable()
         this.sub = this.auth.login(this.loginForm.value).subscribe(
             () => this.router.navigate(['/search']),
-            error => {
-                //TODO показать сообщение об ошибке
+            () => {
+                this.messageService.add({
+                    type: 'error',
+                    text: 'Неправильный логин или пароль'
+                })
                 this.loginForm.enable()
             }
         )
