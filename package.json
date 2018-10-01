@@ -2,7 +2,7 @@
   "name": "stack-overflow-search",
   "version": "0.0.1",
   "scripts": {
-    "server": "nodemon server/",
+    "server": "node server/",
     "build": "webpack --progress --env.mode=prod",
     "client": "webpack-dev-server --color --progress  --env.mode=dev",
     "app": "concurrently \"npm run server\" \"npm run client\""

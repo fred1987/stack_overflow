@@ -19,9 +19,13 @@ class UserController {
     static async sendEmailRecovery(ctx) {
         const user = await UserController.findByEmail(ctx)
 
-        if (null === user) return {
-            error: true,
-            message: 'Такого пользователя нет в системе'
+        if (null === user) {
+            ctx.response.status = 404
+            ctx.body = {
+                error: true,
+                message: 'Такого пользователя нет в системе'
+            }
+            return false
         }
 
         const salt = bcrypt.genSaltSync(11)
@@ -112,7 +116,7 @@ class UserController {
             ctx.response.status = 403
             ctx.body = {
                 error: true,
-                message: 'Неправильный логин или пароль'
+                message: 'Неверный логин или пароль'
             }
         } else {
             ctx.body = {
