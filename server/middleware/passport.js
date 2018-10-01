@@ -7,6 +7,7 @@ const options = {
     secretOrKey: token
 }
 
+//middleware for check secure routes
 module.exports = function init(passport) {
     passport.use(new Strategy(options, async (payload, done) => {
         const user = await User.findById(payload.id)

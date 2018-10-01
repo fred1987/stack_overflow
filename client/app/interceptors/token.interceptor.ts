@@ -14,7 +14,8 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (this.auth.isAuthenticated()) {
+        //set header only for backend api
+        if (this.auth.isAuthenticated() && !req.url.includes('api.stackexchange.com')) {
             req = req.clone({
                 setHeaders: {
                     Authorization: this.auth.token

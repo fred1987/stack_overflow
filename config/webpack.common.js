@@ -52,12 +52,10 @@ module.exports = {
         ]
     },
     plugins: [
-        // Workaround for angular/angular#11580
         new webpack.ContextReplacementPlugin(
-            // The (\\|\/) piece accounts for path separators in *nix and Windows
             /\@angular(\\|\/)core(\\|\/)fesm5/,
-            helpers.root('./client'), // location of your src
-            {} // a map of your routes
+            helpers.root('./client'),
+            {}
         ),
         new CleanWebpackPlugin([helpers.root('public')], process.cwd()),
         new HtmlWebpackPlugin({

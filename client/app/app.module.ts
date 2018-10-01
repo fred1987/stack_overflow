@@ -48,11 +48,11 @@ import {TopMenuComponent} from './components/top-menu/top-menu.component'
         PreloaderComponent
     ],
     providers: [
-        // {
-        //     provide: HTTP_INTERCEPTORS,
-        //     multi: true,
-        //     useClass: TokenInterceptor
-        // }
+        {
+            provide: HTTP_INTERCEPTORS,
+            multi: true,
+            useClass: TokenInterceptor
+        }
     ],
     bootstrap: [AppComponent]
 })

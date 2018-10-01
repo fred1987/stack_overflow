@@ -1,9 +1,9 @@
 .panel {
     position: fixed;
-    box-shadow: 0 -3px 4px -3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 15px 30px 10px rgba(0, 0, 0, .5);
     background-color: #fff;
     z-index: 200;
-    height: 500px;
+    height: 400px;
     width: 100%;
     left: 0;
     padding: 17px;

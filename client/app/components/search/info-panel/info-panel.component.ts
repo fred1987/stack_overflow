@@ -10,7 +10,7 @@ import {StackOverflowQuestion} from '../../../interfaces'
     animations: [
         trigger('panel', [
             state('start', style({
-                bottom: '-550px'
+                bottom: '-450px'
             })),
             state('end', style({
                 bottom: '0'

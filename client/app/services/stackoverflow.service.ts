@@ -29,6 +29,13 @@ export class StackoverflowService {
             .pipe(
                 map(data => {
                     let questions = data['items']
+                    if (!('q' in params)) {
+                        //get 5 items more popularity
+                        questions = questions.sort((a: any, b: any) => {
+                            return a.answer_count - b.answer_count
+                        })
+                        if (questions.length >= 5) questions = questions.slice(-6, -1)
+                    }
                     return questions.map((item: any) => {
                         return {
                             id: item.question_id,

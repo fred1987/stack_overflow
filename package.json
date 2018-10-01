@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "server": "nodemon server/",
-    "build": "webpack -p --progress --env.mode=prod",
-    "build-dev": "webpack -d --progress --env.mode=dev",
+    "build": "webpack --progress --env.mode=prod",
     "client": "webpack-dev-server --color --progress  --env.mode=dev",
     "app": "concurrently \"npm run server\" \"npm run client\""
   },

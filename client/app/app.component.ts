@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core'
+import {Router} from '@angular/router'
 
 import {AuthService} from './services/auth.service'
 import {fadeAnimation} from './animations'
 import '../assets/css/normalize.css'
 import '../assets/css/main.css'
-import {Router} from '@angular/router'
 
 @Component({
     selector: 'my-app',
@@ -15,7 +15,9 @@ import {Router} from '@angular/router'
         </main>
         <message></message>`,
     animations: [fadeAnimation],
-    host: {'(document:keydown)': 'handleKeyboardEvents($event)'}
+    host: {
+        '(document:keydown)': 'handleKeyboardEvents($event)'
+    }
 })
 
 export class AppComponent implements OnInit {
@@ -29,20 +31,19 @@ export class AppComponent implements OnInit {
     }
 
     private handleKeyboardEvents(event: KeyboardEvent) {
-        switch (event.keyCode) {
-            case 81:
-                this.route.navigate(['/'])
-                break
-            case 87:
-                this.route.navigate(['/register'])
-                break
-            case 69:
-                this.route.navigate(['/recovery/email'])
-                break
-            case 83:
-                this.route.navigate(['/search'])
-                break
+        if (event.keyCode === 27) this.route.navigate(['/'])
+        if (event.ctrlKey) {
+            switch (event.keyCode) {
+                case 65:
+                    this.route.navigate(['/register']) //a
+                    break
+                case 82:
+                    this.route.navigate(['/recovery/email']) //r
+                    break
+                case 90:
+                    this.route.navigate(['/search']) //z
+                    break
+            }
         }
     }
-
 }
